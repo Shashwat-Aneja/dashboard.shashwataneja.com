@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   Activity,
-  ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
   Bell,
@@ -9,7 +8,6 @@ import {
   CalendarDays,
   Check,
   ChevronDown,
-  ChevronLeft,
   ChevronRight,
   CircleHelp,
   Command,
