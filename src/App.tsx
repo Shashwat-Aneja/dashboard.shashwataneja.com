@@ -189,7 +189,100 @@ function App() {
               <p>Your Studio project updates and shared files will appear here as they are added to your account.</p>
             </section>
           ) : (
-            <>{adminContent}</>
+            <>
+          <section className="metric-grid" aria-label="Workspace metrics">
+            <article className="metric-card metric-featured">
+              <div className="metric-top"><span>PROJECT VALUE</span><span className="metric-icon"><BriefcaseBusiness size={17} /></span></div>
+              <div className="metric-value">₹4,82,500</div>
+              <div className="metric-foot"><span className="trend trend-up"><ArrowUpRight size={13} /> 12.8%</span><span>vs. previous month</span></div>
+              <div className="metric-decoration" />
+            </article>
+            <article className="metric-card">
+              <div className="metric-top"><span>ACTIVE PROJECTS</span><span className="metric-icon olive-icon"><FolderKanban size={17} /></span></div>
+              <div className="metric-value">08</div>
+              <div className="metric-foot"><span className="metric-note">03 due this month</span></div>
+              <div className="metric-mini-bars"><i /><i /><i /><i /><i /><i /><i /></div>
+            </article>
+            <article className="metric-card">
+              <div className="metric-top"><span>AWAITING APPROVAL</span><span className="metric-icon sand-icon"><ShieldCheck size={17} /></span></div>
+              <div className="metric-value">04</div>
+              <div className="metric-foot"><span className="metric-note">Needs your attention</span></div>
+              <div className="metric-approval"><span /><span /><span /><span /></div>
+            </article>
+            <article className="metric-card">
+              <div className="metric-top"><span>UNREAD MESSAGES</span><span className="metric-icon rose-icon"><MessageCircle size={17} /></span></div>
+              <div className="metric-value">03</div>
+              <div className="metric-foot"><span className="metric-note">Across 2 conversations</span></div>
+              <div className="metric-message"><span /><span /><span /></div>
+            </article>
+          </section>
+
+          <section className="content-grid">
+            <article className="panel revenue-panel">
+              <div className="panel-heading">
+                <div><span className="section-kicker">FINANCIAL OVERVIEW</span><h2>Revenue overview</h2><p>A steady view of your studio's momentum.</p></div>
+                <button className="icon-button" aria-label="More revenue options"><MoreHorizontal size={19} /></button>
+              </div>
+              <div className="chart-summary"><strong>₹2,84,000</strong><span className="trend trend-up"><ArrowUpRight size={13} /> 18.4%</span><small>Collected this period</small></div>
+              <div className="chart-wrap">
+                <div className="chart-y-labels"><span>₹1.0L</span><span>₹75k</span><span>₹50k</span><span>₹25k</span><span>₹0</span></div>
+                <div className="bar-chart" role="img" aria-label="Illustrative monthly revenue chart from January to December">
+                  <div className="chart-grid-lines"><i /><i /><i /><i /><i /></div>
+                  {revenue.map((height, index) => <div className="bar-column" key={index}><span className={index === 11 ? "bar bar-highlight" : "bar"} style={{ height: `${height}%` }} /></div>)}
+                </div>
+              </div>
+              <div className="chart-months"><span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span><span>NOV</span><span>DEC</span></div>
+            </article>
+
+            <article className="panel attention-panel">
+              <div className="panel-heading">
+                <div><span className="section-kicker">YOUR ATTENTION</span><h2>Things to follow up</h2><p>A few things need a closer look.</p></div>
+                <span className="attention-count">04</span>
+              </div>
+              <div className="attention-list">
+                <button className="attention-item" onClick={() => setActivePage("Approvals")}><span className="attention-symbol approval-symbol"><ShieldCheck size={16} /></span><span className="attention-copy"><strong>Design approval pending</strong><small>Northstar Commerce · 2 days ago</small></span><ArrowRight size={15} /></button>
+                <button className="attention-item" onClick={() => setActivePage("Finance")}><span className="attention-symbol payment-symbol"><CreditCard size={16} /></span><span className="attention-copy"><strong>Invoice payment due</strong><small>Meridian Platform · ₹24,000</small></span><ArrowRight size={15} /></button>
+                <button className="attention-item" onClick={() => setActivePage("Tasks & operations")}><span className="attention-symbol task-symbol"><CalendarDays size={16} /></span><span className="attention-copy"><strong>Milestone approaching</strong><small>Forma Identity · Nov 06</small></span><ArrowRight size={15} /></button>
+                <button className="attention-item" onClick={() => setActivePage("Communication")}><span className="attention-symbol message-symbol"><MessageCircle size={16} /></span><span className="attention-copy"><strong>3 unread messages</strong><small>Across 2 client conversations</small></span><ArrowRight size={15} /></button>
+              </div>
+              <button className="text-link" onClick={() => setActivePage("Activity")}>View all activity <ArrowRight size={14} /></button>
+            </article>
+          </section>
+
+          <section className="bottom-grid">
+            <article className="panel projects-panel">
+              <div className="panel-heading project-heading">
+                <div><span className="section-kicker">IN MOTION</span><h2>Active projects <span className="heading-count">08</span></h2><p>Keep track of what's being built.</p></div>
+                <button className="text-link" onClick={() => setActivePage("Projects")}>All projects <ArrowRight size={14} /></button>
+              </div>
+              <div className="project-table">
+                <div className="project-table-head"><span>PROJECT</span><span>PROGRESS</span><span>STATUS</span><span>DUE DATE</span><span /></div>
+                {projects.map((project) => (
+                  <div className="project-row" key={project.name}>
+                    <div className="project-name-cell"><span className={`project-symbol ${project.color}`}>{project.name.slice(0, 1)}</span><span><strong>{project.name}</strong><small>{project.client}</small></span></div>
+                    <div className="progress-cell"><div className="progress-track"><span style={{ width: `${project.progress}%` }} /></div><small>{project.progress}%</small></div>
+                    <div><span className={project.status === "In review" ? "status-pill status-review" : "status-pill"}><i />{project.status}</span></div>
+                    <span className="due-date">{project.due}</span>
+                    <button className="icon-button row-more" aria-label={`More options for ${project.name}`}><MoreHorizontal size={17} /></button>
+                  </div>
+                ))}
+              </div>
+              <button className="mobile-all-link" onClick={() => setActivePage("Projects")}>View all projects <ArrowRight size={14} /></button>
+            </article>
+
+            <article className="panel activity-panel">
+              <div className="panel-heading">
+                <div><span className="section-kicker">THE LATEST</span><h2>Recent activity</h2><p>Small updates, all in one place.</p></div>
+                <button className="icon-button" aria-label="More activity options"><MoreHorizontal size={19} /></button>
+              </div>
+              <div className="activity-list">
+                {activityItems.map((item) => <div className="activity-item" key={item.title}><span className={`activity-avatar ${item.tone}`}>{item.initials}</span><div className="activity-copy"><strong>{item.title}</strong><small>{item.detail}</small><time>{item.time}</time></div></div>)}
+              </div>
+              <button className="text-link activity-link" onClick={() => setActivePage("Activity")}>See all updates <ArrowRight size={14} /></button>
+            </article>
+          </section>
+
+            </>
           )}
 
           <footer className="page-footer"><span>© 2026 Shashwat Aneja Studio</span><span><i /> All systems operational</span><a href="mailto:hello@shashwataneja.com">Need help? Get in touch <ArrowUpRight size={12} /></a></footer>
