@@ -42,3 +42,8 @@ npm run build
 The first UI pass includes the responsive application shell, admin/client workspace switcher, light/dark theme persistence, navigation state, dashboard metrics, project progress, revenue visualisation, follow-up items, and recent activity.
 
 The current dashboard data is illustrative and must be replaced by authorised backend data before production use. Authentication, role enforcement, database access, and Studio integration are not yet implemented.
+
+
+## Authentication
+
+The Dashboard uses Supabase Auth with email/password sign-in. Client accounts are provisioned after Studio confirms a Razorpay payment through its signed webhook. Invitation links redirect to `/auth/set-password`; clients set their own password. Configure `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in the Vercel project. Set `app_metadata.role=admin` only from a trusted server or Supabase dashboard for administrator accounts. The browser never decides admin access from user-editable metadata.
