@@ -93,7 +93,8 @@ function App() {
           <button className="icon-button sidebar-close" aria-label="Close navigation" onClick={() => setSidebarOpen(false)}><X size={17} /></button>
         </div>
 
-        {isAdmin ? (<div className="workspace-wrap">
+        {isAdmin ? (
+          <div className="workspace-wrap">
           <button className="workspace-switcher" onClick={() => setWorkspaceOpen(!workspaceOpen)} aria-expanded={workspaceOpen}>
             <span className="workspace-avatar">{isClient ? "N" : "S"}</span>
             <span className="workspace-label"><strong>{workspace}</strong><small>{isClient ? "Northstar Labs" : "Studio operations"}</small></span>
@@ -109,7 +110,8 @@ function App() {
               ))}
             </div>
           )}
-        </div>        ) : (
+          </div>
+        ) : (
           <div className="workspace-wrap"><div className="workspace-switcher"><span className="workspace-avatar">C</span><span className="workspace-label"><strong>Client workspace</strong><small>Your Studio projects</small></span></div></div>
         )}
 
